@@ -1,0 +1,2449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INKO — Flags & Sign Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --ink: #111110;
+            --ink2: #1c1c1b;
+            --ink3: #2a2a28;
+            --stone: #4a4a47;
+            --muted: #888884;
+            --border: rgba(255, 255, 255, 0.09);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --white: #ffffff;
+            --off-white: #f4f2ed;
+            --cream: #ede9e0;
+            --red: #c8111d;
+            --red-h: #a50e17;
+            --fs: 'DM Sans', sans-serif;
+            --fd: 'DM Serif Display', serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--fs);
+            background: var(--white);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+        
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        /* ─── UTILS ─────────────────────────────────────────── */
+        
+        .eyebrow {
+            font-family: var(--fs);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+        
+        .eyebrow-dark {
+            color: var(--muted);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 13px 28px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+            cursor: pointer;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+        
+        .btn:hover {
+            background: var(--ink);
+            color: var(--white);
+        }
+        
+        .btn-filled {
+            background: var(--ink);
+            color: var(--white);
+            border-color: var(--ink);
+        }
+        
+        .btn-filled:hover {
+            background: var(--ink2);
+            border-color: var(--ink2);
+        }
+        
+        .btn-red {
+            background: var(--red);
+            color: var(--white);
+            border-color: var(--red);
+        }
+        
+        .btn-red:hover {
+            background: var(--red-h);
+            border-color: var(--red-h);
+        }
+        
+        .btn-ghost-white {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .btn-ghost-white:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+            color: var(--white);
+        }
+        
+        .arrow-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ink);
+            transition: gap .2s;
+        }
+        
+        .arrow-link::after {
+            content: '→';
+        }
+        
+        .arrow-link:hover {
+            gap: 14px;
+        }
+        
+        .arrow-link-white {
+            color: rgba(255, 255, 255, 0.65);
+        }
+        
+        .arrow-link-white:hover {
+            color: var(--white);
+        }
+        /* ─── NAV ─────────────────────────────────────────────── */
+        
+        .nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 200;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            transition: background .3s, border-color .3s, box-shadow .3s;
+        }
+        
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 24px rgba(0, 0, 0, 0.06);
+        }
+        
+        .nav.dark-mode {
+            background: rgba(17, 17, 16, 0.0);
+        }
+        
+        .nav.dark-mode.scrolled {
+            background: rgba(17, 17, 16, 0.96);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .nav-logo-wordmark {
+            font-family: var(--fs);
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1;
+            color: var(--white);
+            transition: color .3s;
+        }
+        
+        .nav-logo-wordmark .dot {
+            color: var(--red);
+        }
+        
+        .nav.scrolled .nav-logo-wordmark {
+            color: var(--ink);
+        }
+        
+        .nav-logo-sub {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            transition: color .3s;
+        }
+        
+        .nav.scrolled .nav-logo-sub {
+            color: var(--muted);
+        }
+        
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+        
+        .nav-center a {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+            transition: color .2s;
+        }
+        
+        .nav-center a:hover {
+            color: var(--white);
+        }
+        
+        .nav.scrolled .nav-center a {
+            color: var(--stone);
+        }
+        
+        .nav.scrolled .nav-center a:hover {
+            color: var(--ink);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-lang {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            transition: color .2s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 2px;
+        }
+        
+        .nav-lang:hover {
+            color: var(--white);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .nav.scrolled .nav-lang {
+            color: var(--stone);
+            border-color: var(--border-light);
+        }
+        
+        .nav.scrolled .nav-lang:hover {
+            color: var(--ink);
+        }
+        
+        .nav-quote {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--red);
+            padding: 9px 20px;
+            border: 1px solid var(--red);
+            transition: background .2s;
+        }
+        
+        .nav-quote:hover {
+            background: var(--red-h);
+        }
+        
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--white);
+            transition: background .3s;
+        }
+        
+        .nav.scrolled .nav-hamburger span {
+            background: var(--ink);
+        }
+        /* ─── HERO ────────────────────────────────────────────── */
+        
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 680px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .hero-video-wrap {
+            position: absolute;
+            inset: 0;
+        }
+        
+        .hero-video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Fallback image shown while video loads */
+        
+        .hero-video-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('images/2.jpg') center/cover;
+            z-index: -1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient( to bottom, rgba(17, 17, 16, 0.15) 0%, rgba(17, 17, 16, 0.1) 40%, rgba(17, 17, 16, 0.65) 75%, rgba(17, 17, 16, 0.9) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 48px 72px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 60px;
+            align-items: flex-end;
+        }
+        
+        .hero-headline {
+            font-family: var(--fd);
+            font-size: clamp(56px, 7.5vw, 112px);
+            line-height: 0.92;
+            letter-spacing: -1px;
+            color: var(--white);
+            margin-bottom: 28px;
+        }
+        
+        .hero-headline em {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .hero-sub {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 380px;
+            margin-bottom: 36px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 20px;
+            padding-bottom: 4px;
+        }
+        
+        .hero-countries {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+        
+        .hero-country {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+            transition: background .2s;
+        }
+        
+        .hero-country:last-child {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-country:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-country-flag {
+            width: 28px;
+            height: 19px;
+            object-fit: cover;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        
+        .hero-country-name {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            flex: 1;
+        }
+        
+        .hero-country-detail {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .hero-scroll-hint span {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollPulse {
+            0%,
+            100% {
+                opacity: 0.4
+            }
+            50% {
+                opacity: 1
+            }
+        }
+        /* ─── TICKER ─────────────────────────────────────────── */
+        
+        .ticker {
+            background: var(--ink);
+            padding: 13px 0;
+            overflow: hidden;
+        }
+        
+        .ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 32s linear infinite;
+        }
+        
+        .ticker-item {
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .ticker-item .sep {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--red);
+            flex-shrink: 0;
+        }
+        
+        @keyframes ticker {
+            from {
+                transform: translateX(0)
+            }
+            to {
+                transform: translateX(-50%)
+            }
+        }
+        /* ─── INTRO BAND ──────────────────────────────────────── */
+        
+        .intro-band {
+            background: var(--off-white);
+            padding: 80px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .intro-left .eyebrow {
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .intro-headline {
+            font-family: var(--fd);
+            font-size: clamp(32px, 3.5vw, 52px);
+            line-height: 1.05;
+            color: var(--ink);
+            margin-bottom: 0;
+        }
+        
+        .intro-headline em {
+            font-style: italic;
+            color: var(--stone);
+        }
+        
+        .intro-right p {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.85;
+            color: var(--stone);
+            margin-bottom: 20px;
+        }
+        
+        .intro-right p:last-of-type {
+            margin-bottom: 28px;
+        }
+        
+        .intro-right strong {
+            font-weight: 500;
+            color: var(--ink);
+        }
+        /* ─── STATS BAND ──────────────────────────────────────── */
+        
+        .stats-band {
+            background: var(--white);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .stat-item {
+            padding: 48px 36px;
+            border-right: 1px solid var(--cream);
+            transition: background .2s;
+        }
+        
+        .stat-item:last-child {
+            border-right: none;
+        }
+        
+        .stat-item:hover {
+            background: var(--off-white);
+        }
+        
+        .stat-num {
+            font-family: var(--fd);
+            font-size: 52px;
+            line-height: 1;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        
+        .stat-num sup {
+            font-family: var(--fs);
+            font-size: 18px;
+            color: var(--red);
+            vertical-align: top;
+            margin-top: 10px;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        /* ─── PRODUCTS ─────────────────────────────────────────── */
+        
+        .products-section {
+            background: var(--white);
+        }
+        
+        .section-header {
+            padding: 72px 48px 48px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .section-header-left .eyebrow {
+            margin-bottom: 14px;
+            display: block;
+        }
+        
+        .section-title {
+            font-family: var(--fd);
+            font-size: clamp(36px, 4vw, 60px);
+            line-height: 0.95;
+            color: var(--ink);
+        }
+        /* Product tabs */
+        
+        .product-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .product-tab {
+            padding: 18px 32px;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color .2s, border-color .2s;
+        }
+        
+        .product-tab:hover {
+            color: var(--ink);
+        }
+        
+        .product-tab.active {
+            color: var(--ink);
+            border-bottom-color: var(--red);
+        }
+        
+        .product-panels {
+            padding: 0 0 80px;
+        }
+        
+        .product-panel {
+            display: none;
+        }
+        
+        .product-panel.active {
+            display: block;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--cream);
+        }
+        
+        .product-card {
+            background: var(--white);
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            transition: background .2s;
+        }
+        
+        .product-card:hover {
+            background: var(--off-white);
+        }
+        
+        .product-card-img {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--off-white);
+        }
+        
+        .product-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(15%);
+            transition: transform .5s ease, filter .4s;
+        }
+        
+        .product-card:hover .product-card-img img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+        
+        .product-card-body {
+            padding: 24px 28px 28px;
+        }
+        
+        .product-card-num {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+        
+        .product-card-name {
+            font-family: var(--fd);
+            font-size: 26px;
+            line-height: 1.1;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+        
+        .product-card-desc {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--stone);
+            margin-bottom: 20px;
+        }
+        
+        .product-card-link {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap .2s;
+        }
+        
+        .product-card:hover .product-card-link {
+            gap: 12px;
+        }
+        
+        .product-card-link::after {
+            content: '→';
+        }
+        /* ─── SERVICES ──────────────────────────────────────────── */
+        
+        .services-section {
+            background: var(--off-white);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--cream);
+            border-top: 1px solid var(--cream);
+        }
+        
+        .service-item {
+            background: var(--off-white);
+            padding: 48px 36px;
+            transition: background .2s;
+        }
+        
+        .service-item:hover {
+            background: var(--cream);
+        }
+        
+        .service-icon-wrap {
+            width: 44px;
+            height: 44px;
+            margin-bottom: 28px;
+        }
+        
+        .service-icon-wrap svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .service-num {
+            font-family: var(--fd);
+            font-size: 13px;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+        
+        .service-name {
+            font-family: var(--fd);
+            font-size: 24px;
+            line-height: 1.1;
+            color: var(--ink);
+            margin-bottom: 14px;
+        }
+        
+        .service-desc {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--stone);
+            margin-bottom: 24px;
+        }
+        /* ─── SPLIT FEATURE ─────────────────────────────────────── */
+        
+        .split-feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 560px;
+            background: var(--cream);
+        }
+        
+        .split-img {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .split-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: transform .6s, filter .4s;
+        }
+        
+        .split-feature:hover .split-img img {
+            transform: scale(1.03);
+            filter: grayscale(0%);
+        }
+        
+        .split-content {
+            padding: 72px 56px;
+            background: var(--ink);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .split-content .eyebrow {
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .split-headline {
+            font-family: var(--fd);
+            font-size: clamp(32px, 3.5vw, 52px);
+            line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+        
+        .split-headline em {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        
+        .split-body {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.85;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 36px;
+        }
+        
+        .split-points {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+        
+        .split-points li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.6;
+        }
+        
+        .split-points li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--red);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+        /* ─── PROJECTS ──────────────────────────────────────────── */
+        
+        .projects-section {
+            background: var(--white);
+        }
+        
+        .projects-mosaic {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: 280px 280px;
+            gap: 2px;
+        }
+        
+        .proj {
+            position: relative;
+            overflow: hidden;
+            background: var(--off-white);
+        }
+        
+        .proj img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%) brightness(.85);
+            transition: filter .5s, transform .6s;
+        }
+        
+        .proj:hover img {
+            filter: grayscale(0%) brightness(.9);
+            transform: scale(1.04);
+        }
+        
+        .proj-caption {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 17, 16, 0.75) 0%, transparent 55%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px 24px;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        
+        .proj:hover .proj-caption {
+            opacity: 1;
+        }
+        
+        .proj-caption-loc {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+        
+        .proj-caption-name {
+            font-family: var(--fd);
+            font-size: 20px;
+            color: var(--white);
+        }
+        
+        .proj-a {
+            grid-column: span 7;
+        }
+        
+        .proj-b {
+            grid-column: span 5;
+        }
+        
+        .proj-c {
+            grid-column: span 4;
+        }
+        
+        .proj-d {
+            grid-column: span 4;
+        }
+        
+        .proj-e {
+            grid-column: span 4;
+        }
+        /* ─── REGIONS ───────────────────────────────────────────── */
+        
+        .regions-section {
+            background: var(--ink);
+            padding: 80px 48px;
+        }
+        
+        .regions-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 56px;
+        }
+        
+        .regions-header .eyebrow {
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .regions-headline {
+            font-family: var(--fd);
+            font-size: clamp(36px, 4vw, 60px);
+            line-height: 0.95;
+            color: var(--white);
+        }
+        
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+        }
+        
+        .region-card {
+            padding: 36px 28px;
+            background: var(--ink2);
+            border: 1px solid var(--border);
+            transition: background .2s, border-color .2s;
+        }
+        
+        .region-card:hover {
+            background: var(--ink3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .region-flag {
+            width: 40px;
+            height: 27px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        
+        .region-country {
+            font-family: var(--fd);
+            font-size: 22px;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+        
+        .region-office {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 16px;
+        }
+        
+        .region-tel {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+        }
+        
+        .region-tel a {
+            color: rgba(255, 255, 255, 0.5);
+            transition: color .2s;
+        }
+        
+        .region-tel a:hover {
+            color: var(--white);
+        }
+        /* ─── FAQ ───────────────────────────────────────────────── */
+        
+        .faq-section {
+            background: var(--off-white);
+            padding: 100px 48px;
+        }
+        
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 100px;
+            margin-top: 56px;
+        }
+        
+        .faq-aside-title {
+            font-family: var(--fd);
+            font-size: 28px;
+            line-height: 1.15;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+        
+        .faq-aside-body {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--stone);
+            margin-bottom: 28px;
+        }
+        
+        .faq-list {
+            list-style: none;
+        }
+        
+        .faq-item {
+            border-top: 1px solid var(--cream);
+        }
+        
+        .faq-item:last-child {
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .faq-q {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 22px 0;
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            transition: color .2s;
+        }
+        
+        .faq-q:hover {
+            color: var(--stone);
+        }
+        
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid var(--cream);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--stone);
+            transition: transform .3s, background .2s, border-color .2s;
+        }
+        
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+            background: var(--ink);
+            border-color: var(--ink);
+            color: var(--white);
+        }
+        
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease;
+        }
+        
+        .faq-item.open .faq-a {
+            max-height: 220px;
+        }
+        
+        .faq-a-inner {
+            padding-bottom: 22px;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.85;
+            color: var(--stone);
+        }
+        /* ─── CONTACT ───────────────────────────────────────────── */
+        
+        .contact-section {
+            background: var(--white);
+            padding: 100px 48px;
+        }
+        
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            margin-top: 56px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .contact-row {
+            padding: 28px 0;
+            border-bottom: 1px solid var(--cream);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .contact-row:first-child {
+            border-top: 1px solid var(--cream);
+        }
+        
+        .contact-row-label {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        
+        .contact-row-value {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--stone);
+        }
+        
+        .contact-row-value a {
+            color: var(--stone);
+            border-bottom: 1px solid var(--cream);
+            transition: border-color .2s, color .2s;
+        }
+        
+        .contact-row-value a:hover {
+            color: var(--ink);
+            border-color: var(--ink);
+        }
+        
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--cream);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+        }
+        
+        .field-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 14px 18px 0;
+        }
+        
+        .field-input {
+            background: none;
+            border: none;
+            outline: none;
+            font-family: var(--fs);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--ink);
+            padding: 8px 18px 14px;
+        }
+        
+        .field-input::placeholder {
+            color: var(--muted);
+            font-weight: 300;
+        }
+        
+        .form-border {
+            height: 1px;
+            background: var(--cream);
+            margin: 0;
+            transition: background .2s;
+        }
+        
+        .field:focus-within .form-border,
+        .field:focus-within {
+            outline: none;
+        }
+        
+        .field:focus-within+.form-border {
+            background: var(--ink);
+        }
+        
+        .form-field-wrap {
+            border: 1px solid var(--cream);
+            border-top: none;
+            transition: border-color .2s;
+        }
+        
+        .form-field-wrap:focus-within {
+            border-color: var(--ink);
+        }
+        
+        .form-select-native {
+            background: none;
+            border: none;
+            outline: none;
+            font-family: var(--fs);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--stone);
+            padding: 8px 18px 14px;
+            width: 100%;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .form-textarea-native {
+            background: none;
+            border: none;
+            outline: none;
+            font-family: var(--fs);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--ink);
+            padding: 8px 18px;
+            width: 100%;
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-textarea-native::placeholder {
+            color: var(--muted);
+            font-weight: 300;
+        }
+        
+        .form-submit-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 28px;
+        }
+        
+        .form-note {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--muted);
+        }
+        
+        .btn-submit {
+            font-family: var(--fs);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--ink);
+            border: 1px solid var(--ink);
+            padding: 14px 32px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        
+        .btn-submit:hover {
+            background: var(--ink2);
+        }
+        /* ─── FOOTER ────────────────────────────────────────────── */
+        
+        footer {
+            background: var(--ink);
+            border-top: 1px solid var(--border);
+            padding: 72px 48px 36px;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: 280px 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 56px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 36px;
+        }
+        
+        .footer-logo-mark {
+            font-family: var(--fs);
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        
+        .footer-logo-mark .dot {
+            color: var(--red);
+        }
+        
+        .footer-logo-sub {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .footer-tagline {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 28px;
+        }
+        
+        .footer-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .iso-badge {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+        }
+        
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .footer-soc {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            transition: border-color .2s, color .2s;
+            border-radius: 2px;
+        }
+        
+        .footer-soc:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-col-title {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .footer-links a {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.3);
+            transition: color .2s;
+        }
+        
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-copy {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-legal a {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.2);
+            transition: color .2s;
+        }
+        
+        .footer-legal a:hover {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        /* ─── RESPONSIVE ────────────────────────────────────────── */
+        
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 28px;
+            }
+            .nav-center {
+                gap: 24px;
+            }
+            .hero-content {
+                padding: 0 28px 64px;
+                gap: 36px;
+            }
+            .intro-band,
+            .stats-band,
+            .products-section .section-header {
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .regions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-center,
+            .nav-lang {
+                display: none;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .nav {
+                padding: 0 24px;
+            }
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 0 24px 56px;
+            }
+            .hero-right {
+                display: none;
+            }
+            .intro-band {
+                grid-template-columns: 1fr;
+                padding: 56px 24px;
+                gap: 36px;
+            }
+            .stats-band {
+                grid-template-columns: 1fr 1fr;
+            }
+            .products-section .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 56px 24px 36px;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-tabs {
+                overflow-x: auto;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .split-feature {
+                grid-template-columns: 1fr;
+            }
+            .split-img {
+                min-height: 280px;
+            }
+            .projects-mosaic {
+                grid-template-rows: 200px 160px;
+            }
+            .proj-a {
+                grid-column: span 12;
+            }
+            .proj-b {
+                grid-column: span 12;
+            }
+            .proj-c,
+            .proj-d,
+            .proj-e {
+                grid-column: span 4;
+            }
+            .regions-section {
+                padding: 56px 24px;
+            }
+            .regions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .faq-section,
+            .contact-section {
+                padding: 72px 24px;
+            }
+            .faq-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding: 48px 0;
+            }
+            footer {
+                padding: 48px 24px 28px;
+            }
+            .form-submit-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .section-header,
+            section {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-band {
+                grid-template-columns: 1fr 1fr;
+            }
+            .regions-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-headline {
+                font-size: 52px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="main-nav">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-wordmark"><span class="dot">i</span>nko</div>
+            <div class="nav-logo-sub">Flags & Sign Systems</div>
+        </a>
+        <ul class="nav-center">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#regions">Regions</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <span class="nav-lang">AR / EN</span>
+            <a href="#contact" class="nav-quote">Get a Quote</a>
+        </div>
+        <button class="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero" id="top">
+        <div class="hero-video-wrap">
+
+            <video autoplay muted loop playsinline poster="flags-poster.jpg">
+        <source src="flags-video.mp4" type="video/mp4">
+      </video>
+            <!--
+      IMPORTANT FOR DEV:
+      Replace the <img> below with your actual flags video:
+      
+
+      For now using a YouTube embed of free flags footage as placeholder:
+    -->
+            <!--<img src="images/1.jpg" alt="Flags flying at INKO installation" style="width:100%;height:100%;object-fit:cover;"> -->
+            <!-- 
+      When the real video is added, the img above is removed.
+      The video from the vercel prototype can drop in here directly.
+    -->
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <p class="eyebrow" style="color:rgba(255,255,255,0.5);margin-bottom:20px;display:block;">Swedish Origin · MENA Distribution</p>
+                <h1 class="hero-headline">Flags,<br>Poles &<br><em>Signage</em></h1>
+                <p class="hero-sub">Professional flagpole and sign systems for governmental, commercial, and architectural environments across the Middle East.</p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn btn-ghost-white">Explore Products</a>
+                    <a href="#contact" class="arrow-link arrow-link-white">Request a Quote</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <p style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;">Distribution Network</p>
+                <div class="hero-countries">
+                    <div class="hero-country">
+                        <img class="hero-country-flag" src="https://flagcdn.com/w40/iq.png" alt="Iraq">
+                        <span class="hero-country-name">Iraq</span>
+                        <span class="hero-country-detail">Baghdad · Erbil</span>
+                    </div>
+                    <div class="hero-country">
+                        <img class="hero-country-flag" src="https://flagcdn.com/w40/ae.png" alt="UAE">
+                        <span class="hero-country-name">UAE</span>
+                        <span class="hero-country-detail">Dubai · Abu Dhabi</span>
+                    </div>
+                    <div class="hero-country">
+                        <img class="hero-country-flag" src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia">
+                        <span class="hero-country-name">Saudi Arabia</span>
+                        <span class="hero-country-detail">Riyadh · Jeddah</span>
+                    </div>
+                    <div class="hero-country">
+                        <img class="hero-country-flag" src="https://flagcdn.com/w40/se.png" alt="Sweden">
+                        <span class="hero-country-name">Sweden</span>
+                        <span class="hero-country-detail">HQ · Manufacturing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="ticker">
+        <div class="ticker-track" id="ticker-inner">
+            <span class="ticker-item"><span class="sep"></span>Flagpoles</span>
+            <span class="ticker-item"><span class="sep"></span>Sign Systems</span>
+            <span class="ticker-item"><span class="sep"></span>Lighting Columns</span>
+            <span class="ticker-item"><span class="sep"></span>City Environments</span>
+            <span class="ticker-item"><span class="sep"></span>ISO Certified</span>
+            <span class="ticker-item"><span class="sep"></span>Swedish Engineering</span>
+            <span class="ticker-item"><span class="sep"></span>10-Year Warranty</span>
+            <span class="ticker-item"><span class="sep"></span>Iraq · UAE · KSA · Sweden</span>
+            <span class="ticker-item"><span class="sep"></span>Custom Installations</span>
+            <span class="ticker-item"><span class="sep"></span>Flagpoles</span>
+            <span class="ticker-item"><span class="sep"></span>Sign Systems</span>
+            <span class="ticker-item"><span class="sep"></span>Lighting Columns</span>
+            <span class="ticker-item"><span class="sep"></span>City Environments</span>
+            <span class="ticker-item"><span class="sep"></span>ISO Certified</span>
+            <span class="ticker-item"><span class="sep"></span>Swedish Engineering</span>
+            <span class="ticker-item"><span class="sep"></span>10-Year Warranty</span>
+            <span class="ticker-item"><span class="sep"></span>Iraq · UAE · KSA · Sweden</span>
+            <span class="ticker-item"><span class="sep"></span>Custom Installations</span>
+        </div>
+    </div>
+
+    <!-- INTRO BAND -->
+    <div class="intro-band">
+        <div class="intro-left">
+            <span class="eyebrow">About INKO</span>
+            <h2 class="intro-headline">Built on<br>Swedish<br><em>Precision</em></h2>
+        </div>
+        <div class="intro-right">
+            <p>INKO is a <strong>Swedish-origin company</strong> headquartered in Dubai, UAE — authorized distributor of Formenta — specializing in high-quality flagpoles, flags, signage, and professional sign systems for governmental, commercial, public,
+                and architectural environments.</p>
+            <p>From the first consultation and project planning to delivery, installation, and after-sales support, INKO provides professional solutions that meet international standards and are adapted to the needs of each project.</p>
+            <a href="#contact" class="arrow-link">Start a project</a>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-band">
+        <div class="stat-item">
+            <div class="stat-num">10<sup>+</sup></div>
+            <div class="stat-label">Year Structural Warranty</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">ISO</div>
+            <div class="stat-label">9001 & 14001 Certified</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Countries Served</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">500<sup>+</sup></div>
+            <div class="stat-label">Projects Completed</div>
+        </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="products-section" id="products">
+        <div class="section-header">
+            <div class="section-header-left">
+                <span class="eyebrow">Our Collection</span>
+                <h2 class="section-title">Products</h2>
+            </div>
+            <a href="#contact" class="arrow-link">View all →</a>
+        </div>
+
+        <div class="product-tabs">
+            <button class="product-tab active" onclick="switchTab('flagpoles',this)">Flagpoles</button>
+            <button class="product-tab" onclick="switchTab('signage',this)">Signage</button>
+            <button class="product-tab" onclick="switchTab('lighting',this)">Lighting Columns</button>
+            <button class="product-tab" onclick="switchTab('city',this)">City Environment</button>
+        </div>
+
+        <div class="product-panels" style="padding:0 0 0">
+
+            <div class="product-panel active" id="panel-flagpoles">
+                <div class="product-grid">
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/2.jpg" alt="Ground Flagpoles">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">01 / Flagpoles</div>
+                            <h3 class="product-card-name">Ground Flagpoles</h3>
+                            <p class="product-card-desc">Freestanding steel and aluminum flagpoles for plazas, entrances, and open environments. Available from 5m to 30m height.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/3.jpg" alt="Wall Mounted">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">02 / Flagpoles</div>
+                            <h3 class="product-card-name">Wall-Mounted Poles</h3>
+                            <p class="product-card-desc">Bracket-mounted flagpoles for facades, balconies, and architectural installations where ground fixing isn't possible.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/1.jpg" alt="Flagpole Accessories">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">03 / Flagpoles</div>
+                            <h3 class="product-card-name">Accessories & Flags</h3>
+                            <p class="product-card-desc">Halyard systems, finials, lighting fixtures, bases, and printed flags — everything needed for a complete flagpole installation.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="product-panel" id="panel-signage">
+                <div class="product-grid">
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/4.jpg" alt="Facade Signage">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">01 / Signage</div>
+                            <h3 class="product-card-name">Facade Signs</h3>
+                            <p class="product-card-desc">Built-up letter, backlit, and dimensional facade signage for corporate buildings, hotels, and retail environments.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/7.jpg" alt="Wayfinding">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">02 / Signage</div>
+                            <h3 class="product-card-name">Wayfinding Systems</h3>
+                            <p class="product-card-desc">Comprehensive directional and identification sign programs for airports, hospitals, complexes, and government campuses.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/5.jpg" alt="Monument Signs">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">03 / Signage</div>
+                            <h3 class="product-card-name">Monument Signs</h3>
+                            <p class="product-card-desc">Freestanding entrance signs and identity monuments for estates, compounds, and institutional gateways.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="product-panel" id="panel-lighting">
+                <div class="product-grid">
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/6.jpg" alt="Lighting Columns">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">01 / Lighting</div>
+                            <h3 class="product-card-name">Street Columns</h3>
+                            <p class="product-card-desc">Architectural lighting columns for streets, plazas, and pedestrian environments — Swedish-engineered for durability in harsh climates.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/8.jpg" alt="Park Lighting">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">02 / Lighting</div>
+                            <h3 class="product-card-name">Park & Garden</h3>
+                            <p class="product-card-desc">Lower-profile bollard and pedestal lighting for parks, gardens, and landscaped public environments.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/1.jpg" alt="Flagpole Lighting">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">03 / Lighting</div>
+                            <h3 class="product-card-name">Flagpole Lighting</h3>
+                            <p class="product-card-desc">Integrated ground-flood and uplighting solutions for flagpole illumination, meeting 24-hour national flag display requirements.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="product-panel" id="panel-city">
+                <div class="product-grid">
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/5.jpg" alt="Planters">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">01 / City</div>
+                            <h3 class="product-card-name">Planters</h3>
+                            <p class="product-card-desc">Architectural concrete, metal, and composite planters for streetscapes, building entrances, and landscape integration.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/6.jpg" alt="Benches">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">02 / City</div>
+                            <h3 class="product-card-name">Street Furniture</h3>
+                            <p class="product-card-desc">Benches, bollards, litter bins, and cycle stands — designed to work within a coherent city environment system.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="product-card">
+                        <div class="product-card-img">
+                            <img src="images/7.jpg" alt="Banners">
+                        </div>
+                        <div class="product-card-body">
+                            <div class="product-card-num">03 / City</div>
+                            <h3 class="product-card-name">Banner Arms & Pennants</h3>
+                            <p class="product-card-desc">Street banner arms and decorative pennant systems for festivals, national events, and permanent city branding programs.</p>
+                            <span class="product-card-link">View details</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="services-section" id="services">
+        <div class="section-header" style="background:var(--off-white)">
+            <div class="section-header-left">
+                <span class="eyebrow">What We Offer</span>
+                <h2 class="section-title">Full-Cycle<br>Service</h2>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-num">01</div>
+                <div class="service-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="#111110" stroke-width="1.2">
+          <rect x="6" y="8" width="32" height="28" rx="2"/>
+          <path d="M14 20h16M22 14v12"/>
+        </svg>
+                </div>
+                <div class="service-name">Consultation & Project Management</div>
+                <p class="service-desc">Site survey, structural assessment, specification drafting, and full project coordination from first meeting to final handover.</p>
+                <a href="#contact" class="arrow-link">Enquire</a>
+            </div>
+            <div class="service-item">
+                <div class="service-num">02</div>
+                <div class="service-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="#111110" stroke-width="1.2">
+          <circle cx="22" cy="22" r="14"/>
+          <path d="M22 14v8l6 4"/>
+        </svg>
+                </div>
+                <div class="service-name">Custom Design & Engineering</div>
+                <p class="service-desc">Bespoke configurations engineered to your architectural specifications — custom heights, finishes, base systems, and lighting integration.</p>
+                <a href="#contact" class="arrow-link">Enquire</a>
+            </div>
+            <div class="service-item">
+                <div class="service-num">03</div>
+                <div class="service-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="#111110" stroke-width="1.2">
+          <path d="M8 36V18l14-10 14 10v18M18 36v-10h8v10"/>
+        </svg>
+                </div>
+                <div class="service-name">Supply & Production</div>
+                <p class="service-desc">ISO-certified Swedish manufacturing via Formenta. Full supply of flagpoles, lighting, signage, and city furniture to MENA projects.</p>
+                <a href="#contact" class="arrow-link">Enquire</a>
+            </div>
+            <div class="service-item">
+                <div class="service-num">04</div>
+                <div class="service-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" stroke="#111110" stroke-width="1.2">
+          <path d="M22 8v28M8 22h28"/>
+          <circle cx="22" cy="22" r="8"/>
+        </svg>
+                </div>
+                <div class="service-name">Installation & Aftercare</div>
+                <p class="service-desc">Professional installation teams across Iraq, UAE, and Saudi Arabia. 10-year structural warranty with ongoing maintenance support.</p>
+                <a href="#contact" class="arrow-link">Enquire</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPLIT FEATURE -->
+    <div class="split-feature">
+        <div class="split-img">
+            <img src="images/3.jpg" alt="INKO Swedish quality installation">
+        </div>
+        <div class="split-content">
+            <span class="eyebrow">Why INKO</span>
+            <h2 class="split-headline">Formenta<br>Authorized<br><em>Distributor</em></h2>
+            <p class="split-body">INKO is the exclusive authorized distribution partner of Formenta, Sweden — one of Scandinavia's leading manufacturers of flagpole and sign systems, with over 50 years of production history.</p>
+            <ul class="split-points">
+                <li>Swedish-manufactured steel and aluminum components with European EN certification</li>
+                <li>10-year structural warranty on all flagpole systems</li>
+                <li>ISO 9001 and ISO 14001 quality and environmental certification</li>
+                <li>Full installation support and in-country service teams across the MENA region</li>
+            </ul>
+            <a href="#contact" class="arrow-link arrow-link-white">Request documentation</a>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="projects-section" id="projects">
+        <div class="section-header">
+            <div class="section-header-left">
+                <span class="eyebrow">Selected Work</span>
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <a href="#contact" class="arrow-link">All projects →</a>
+        </div>
+        <div class="projects-mosaic">
+            <div class="proj proj-a">
+                <img src="images/1.jpg" alt="Government complex">
+                <div class="proj-caption">
+                    <div class="proj-caption-loc">Baghdad, Iraq</div>
+                    <div class="proj-caption-name">Government Complex</div>
+                </div>
+            </div>
+            <div class="proj proj-b">
+                <img src="images/2.jpg" alt="Corporate HQ">
+                <div class="proj-caption">
+                    <div class="proj-caption-loc">Dubai, UAE</div>
+                    <div class="proj-caption-name">Corporate Headquarters</div>
+                </div>
+            </div>
+            <div class="proj proj-c">
+                <img src="images/4.jpg" alt="Hotel signage">
+                <div class="proj-caption">
+                    <div class="proj-caption-loc">Erbil, Iraq</div>
+                    <div class="proj-caption-name">5-Star Hotel Signage</div>
+                </div>
+            </div>
+            <div class="proj proj-d">
+                <img src="images/5.jpg" alt="Port authority">
+                <div class="proj-caption">
+                    <div class="proj-caption-loc">Jeddah, KSA</div>
+                    <div class="proj-caption-name">Port Authority</div>
+                </div>
+            </div>
+            <div class="proj proj-e">
+                <img src="images/7.jpg" alt="Stadium">
+                <div class="proj-caption">
+                    <div class="proj-caption-loc">Riyadh, KSA</div>
+                    <div class="proj-caption-name">Stadium Complex</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGIONS -->
+    <div class="regions-section" id="regions">
+        <div class="regions-header">
+            <div>
+                <span class="eyebrow">Distribution Network</span>
+                <h2 class="regions-headline">Where<br>We Operate</h2>
+            </div>
+            <a href="#contact" class="arrow-link arrow-link-white">Contact a regional office</a>
+        </div>
+        <div class="regions-grid">
+            <div class="region-card">
+                <img class="region-flag" src="https://flagcdn.com/w80/iq.png" alt="Iraq">
+                <div class="region-country">Iraq</div>
+                <div class="region-office">Baghdad · Erbil</div>
+                <div class="region-tel">
+                    <a href="tel:+9647504201761">+964 750 420 1761</a><br>
+                    <a href="mailto:info@inko.ae">info@inko.ae</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <img class="region-flag" src="https://flagcdn.com/w80/ae.png" alt="UAE">
+                <div class="region-country">UAE</div>
+                <div class="region-office">Dubai (HQ)</div>
+                <div class="region-tel">
+                    <a href="tel:+971507504938">+971 507 504 938</a><br>
+                    <a href="mailto:hikmet@inko.ae">hikmet@inko.ae</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <img class="region-flag" src="https://flagcdn.com/w80/sa.png" alt="Saudi Arabia">
+                <div class="region-country">Saudi Arabia</div>
+                <div class="region-office">Riyadh · Jeddah</div>
+                <div class="region-tel">
+                    <a href="tel:+966569990006">+966 569 990 006</a><br>
+                    <a href="mailto:info@inko.ae">info@inko.ae</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <img class="region-flag" src="https://flagcdn.com/w80/se.png" alt="Sweden">
+                <div class="region-country">Sweden</div>
+                <div class="region-office">HQ & Manufacturing</div>
+                <div class="region-tel">
+                    <a href="tel:+46707425572">+46 707 425 572</a><br>
+                    <a href="mailto:info@inko.ae">info@inko.ae</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section" id="faq">
+        <span class="eyebrow eyebrow-dark">Frequently Asked</span>
+        <div class="faq-layout">
+            <div class="faq-aside">
+                <h2 class="faq-aside-title">Questions & Answers</h2>
+                <p class="faq-aside-body">Everything you need to know about our products, processes, and commitment to quality. Can't find what you're looking for? Reach out directly.</p>
+                <a href="#contact" class="arrow-link">Contact us</a>
+            </div>
+            <ul class="faq-list">
+                <li class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+          What types of environments are your flagpoles suitable for?
+          <span class="faq-icon">+</span>
+        </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Our flagpoles are engineered for governmental plazas, corporate headquarters, hotels, airports, stadiums, coastal environments, and extreme-climate installations. Each system is specified to the wind load and soil conditions of
+                            its site.</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+          Do you offer custom installations and bespoke designs?
+          <span class="faq-icon">+</span>
+        </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Yes. We offer fully custom heights, finishes, base systems, and lighting integrations. Our design team works directly with your architects and project managers to ensure specifications match both aesthetic requirements and structural
+                            load calculations.</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+          What is your warranty policy?
+          <span class="faq-icon">+</span>
+        </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">All INKO flagpole systems carry a 10-year structural warranty. We maintain service teams across Iraq, UAE, and Saudi Arabia for on-site inspection, maintenance, and replacement parts. Long-term service agreements are available
+                            for major installations.</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+          What certifications do your products hold?
+          <span class="faq-icon">+</span>
+        </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">INKO products are manufactured under ISO 9001 and ISO 14001 certification via our Formenta partnership. All structural components are tested to relevant European EN standards for wind resistance and material durability.</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+          How do I request a quotation for a commercial project?
+          <span class="faq-icon">+</span>
+        </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Fill in the contact form below with your project details — location, product type, quantity, and any drawings or specifications you have — and our team will respond within 24 hours with an initial consultation and quotation.</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+          Can you supply and install across multiple countries in one project?
+          <span class="faq-icon">+</span>
+        </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Yes. We regularly manage cross-border supply and installation for clients with facilities in multiple MENA countries. Our regional presence in Iraq, UAE, and Saudi Arabia allows us to coordinate large-scale projects with unified
+                            standards.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-section" id="contact">
+        <span class="eyebrow eyebrow-dark">Get In Touch</span>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:14px;margin-bottom:0">
+            <h2 class="section-title" style="font-family:var(--fd);font-size:clamp(36px,4vw,60px);line-height:.95;color:var(--ink)">Start a<br>Project</h2>
+            <p style="font-size:13px;font-weight:300;color:var(--muted);max-width:280px;line-height:1.75;padding-bottom:4px;text-align:right;">We typically respond within 24 hours. For urgent enquiries, call the regional office directly.</p>
+        </div>
+        <div class="contact-layout" style="margin-top:48px">
+            <div class="contact-info">
+                <div class="contact-row">
+                    <div class="contact-row-label">Headquarters</div>
+                    <div class="contact-row-value">Dubai, United Arab Emirates<br>Baghdad, Iraq</div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-row-label">Email</div>
+                    <div class="contact-row-value">
+                        <a href="mailto:info@inko.ae">info@inko.ae</a><br>
+                        <a href="mailto:hikmet@inko.ae">hikmet@inko.ae</a>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-row-label">Phone</div>
+                    <div class="contact-row-value">
+                        <a href="tel:+9647504201761">IRQ: +964 750 420 1761</a><br>
+                        <a href="tel:+971507504938">UAE: +971 507 504 938</a><br>
+                        <a href="tel:+966569990006">KSA: +966 569 990 006</a><br>
+                        <a href="tel:+46707425572">SWE: +46 707 425 572</a>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-row-label">Working Hours</div>
+                    <div class="contact-row-value">Sunday – Thursday<br>8:00 AM – 6:00 PM GST</div>
+                </div>
+            </div>
+
+            <form class="form" onsubmit="handleSubmit(event)">
+                <div class="form-field-wrap" style="border:1px solid var(--cream)">
+                    <div class="form-row-2">
+                        <div class="field" style="border-right:1px solid var(--cream)">
+                            <label class="field-label">First Name</label>
+                            <input type="text" class="field-input" placeholder="Ahmed" required>
+                        </div>
+                        <div class="field">
+                            <label class="field-label">Last Name</label>
+                            <input type="text" class="field-input" placeholder="Al-Rashidi" required>
+                        </div>
+                    </div>
+                    <div style="border-top:1px solid var(--cream)" class="form-row-2">
+                        <div class="field" style="border-right:1px solid var(--cream)">
+                            <label class="field-label">Email</label>
+                            <input type="email" class="field-input" placeholder="ahmed@company.com" required>
+                        </div>
+                        <div class="field">
+                            <label class="field-label">Phone</label>
+                            <input type="tel" class="field-input" placeholder="+964 ...">
+                        </div>
+                    </div>
+                    <div style="border-top:1px solid var(--cream)" class="field">
+                        <label class="field-label">Organization</label>
+                        <input type="text" class="field-input" placeholder="Ministry / Company / Hotel">
+                    </div>
+                    <div style="border-top:1px solid var(--cream)" class="field">
+                        <label class="field-label">Product Interest</label>
+                        <select class="form-select-native">
+            <option value="">Select a category</option>
+            <option>Flagpoles</option>
+            <option>Signage Systems</option>
+            <option>Lighting Columns</option>
+            <option>City Environment</option>
+            <option>Multiple / Not Sure</option>
+          </select>
+                    </div>
+                    <div style="border-top:1px solid var(--cream)" class="field">
+                        <label class="field-label">Project Details</label>
+                        <textarea class="form-textarea-native" placeholder="Tell us about your project — location, scope, quantity, timeline..."></textarea>
+                    </div>
+                </div>
+                <div class="form-submit-row">
+                    <span class="form-note">Your information is kept confidential.</span>
+                    <button type="submit" class="btn-submit">Send Message →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-logo-mark"><span class="dot">i</span>nko</div>
+                <div class="footer-logo-sub">Flags & Sign Systems</div>
+                <p class="footer-tagline">Swedish quality. MENA expertise. Flagpoles, signage, and city environments from Baghdad to Dubai.</p>
+                <div class="footer-badges">
+                    <span class="iso-badge">ISO 9001</span>
+                    <span class="iso-badge">ISO 14001</span>
+                </div>
+                <div class="footer-socials">
+                    <a href="#" class="footer-soc" aria-label="LinkedIn">in</a>
+                    <a href="#" class="footer-soc" aria-label="Facebook">f</a>
+                    <a href="#" class="footer-soc" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+            <div>
+                <p class="footer-col-title">Products</p>
+                <ul class="footer-links">
+                    <li><a href="#">Flagpoles</a></li>
+                    <li><a href="#">Flagpole Accessories</a></li>
+                    <li><a href="#">Flagpole Lighting</a></li>
+                    <li><a href="#">Flags & Pennants</a></li>
+                    <li><a href="#">Lighting Columns</a></li>
+                    <li><a href="#">Planters & Street Furniture</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-col-title">Company</p>
+                <ul class="footer-links">
+                    <li><a href="#">About INKO</a></li>
+                    <li><a href="#">Our History</a></li>
+                    <li><a href="#">Formenta Partnership</a></li>
+                    <li><a href="#">ISO Certificates</a></li>
+                    <li><a href="#">Terms of Purchase</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-col-title">Contact</p>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@inko.ae">info@inko.ae</a></li>
+                    <li><a href="tel:+9647504201761">IRQ: +964 750 420 1761</a></li>
+                    <li><a href="tel:+971507504938">UAE: +971 507 504 938</a></li>
+                    <li><a href="tel:+966569990006">KSA: +966 569 990 006</a></li>
+                    <li><a href="tel:+46707425572">SWE: +46 707 425 572</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2025 INKO Flags & Sign Systems. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky nav
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // FAQ accordion
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        // Product tabs
+        function switchTab(id, btn) {
+            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('panel-' + id).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Form
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            const orig = btn.textContent;
+            btn.textContent = 'Message Sent ✓';
+            btn.style.background = '#1f6b3a';
+            btn.style.borderColor = '#1f6b3a';
+            setTimeout(() => {
+                btn.textContent = orig;
+                btn.style.background = '';
+                btn.style.borderColor = '';
+                e.target.reset();
+            }, 4000);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) {
+                    e.preventDefault();
+                    t.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fade-in on scroll
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                    obs.unobserve(e.target);
+                }
+            });
+        }, {
+            threshold: 0.08
+        });
+
+        const fadeEls = '.stat-item, .service-item, .product-card, .region-card';
+        document.querySelectorAll(fadeEls).forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            el.style.transition = `opacity 0.45s ease ${(i % 4) * 0.08}s, transform 0.45s ease ${(i % 4) * 0.08}s`;
+            obs.observe(el);
+        });
+    </script>
+</body>
+
+</html>
