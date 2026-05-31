@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INKO — Flags & Sign Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,300;1,6..12,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         *,
         *::before,
@@ -29,8 +29,8 @@
             --cream: #ede9e0;
             --red: #c8111d;
             --red-h: #a50e17;
-            --fs: 'DM Sans', sans-serif;
-            --fd: 'DM Serif Display', serif;
+            --fs: 'Nunito Sans', 'brandon-grotesque', sans-serif;
+            --fd: 'Cormorant Garamond', serif;
         }
         
         html {
@@ -144,7 +144,7 @@
         }
         
         .arrow-link-white {
-            color: rgba(255, 255, 255, 0.65);
+            color: #ffffff;
         }
         
         .arrow-link-white:hover {
@@ -332,7 +332,7 @@
             inset: 0;
         }
         
-        .hero-video-wrap video {
+        .hero-video-wrap img, .hero-video-wrap video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -374,14 +374,14 @@
         
         .hero-headline em {
             font-style: italic;
-            color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
         }
         
         .hero-sub {
             font-size: 14px;
             font-weight: 300;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.6);
+            color: #ffffff;
             max-width: 380px;
             margin-bottom: 36px;
         }
@@ -484,49 +484,7 @@
                 opacity: 1
             }
         }
-        /* ─── TICKER ─────────────────────────────────────────── */
-        
-        .ticker {
-            background: var(--ink);
-            padding: 13px 0;
-            overflow: hidden;
-        }
-        
-        .ticker-track {
-            display: flex;
-            white-space: nowrap;
-            animation: ticker 32s linear infinite;
-        }
-        
-        .ticker-item {
-            flex-shrink: 0;
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            padding: 0 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .ticker-item .sep {
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background: var(--red);
-            flex-shrink: 0;
-        }
-        
-        @keyframes ticker {
-            from {
-                transform: translateX(0)
-            }
-            to {
-                transform: translateX(-50%)
-            }
-        }
+
         /* ─── INTRO BAND ──────────────────────────────────────── */
         
         .intro-band {
@@ -554,14 +512,14 @@
         
         .intro-headline em {
             font-style: italic;
-            color: var(--stone);
+            color: var(--ink);
         }
         
         .intro-right p {
             font-size: 15px;
             font-weight: 300;
             line-height: 1.85;
-            color: var(--stone);
+            color: var(--ink);
             margin-bottom: 20px;
         }
         
@@ -881,14 +839,14 @@
         
         .split-headline em {
             font-style: italic;
-            color: rgba(255, 255, 255, 0.45);
+            color: #ffffff;
         }
         
         .split-body {
             font-size: 14px;
             font-weight: 300;
             line-height: 1.85;
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255,255,255,0.9);
             margin-bottom: 36px;
         }
         
@@ -906,7 +864,7 @@
             gap: 14px;
             font-size: 13px;
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255,255,255,0.9);
             line-height: 1.6;
         }
         
@@ -1659,10 +1617,223 @@
                 font-size: 52px;
             }
         }
+
+        /* ─── MEGA MENU ─────────────────────────────────────── */
+        .mega-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: var(--ink);
+            display: flex;
+            align-items: stretch;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-8px);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+        .mega-menu.open {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+        .mega-menu-inner {
+            width: 100%;
+            padding: 100px 48px 60px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .mega-menu-close {
+            position: absolute;
+            top: 28px;
+            right: 48px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        .mega-menu-close span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: rgba(255,255,255,0.6);
+            position: absolute;
+            transition: background .2s;
+        }
+        .mega-menu-close span:first-child { transform: rotate(45deg); }
+        .mega-menu-close span:last-child  { transform: rotate(-45deg); }
+        .mega-menu-close:hover span { background: #fff; }
+
+        .mega-menu-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr 1fr;
+            gap: 60px;
+            height: 100%;
+            align-items: start;
+            padding-top: 20px;
+        }
+        .mega-cat {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red);
+            display: block;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .mega-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mega-links a {
+            font-family: var(--fd);
+            font-size: clamp(22px, 2.5vw, 32px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.55);
+            transition: color .2s;
+            display: block;
+            padding: 5px 0;
+            line-height: 1.2;
+        }
+        .mega-links a:hover { color: #fff; }
+        .mega-contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .mega-contact-info a {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.45);
+            transition: color .2s;
+        }
+        .mega-contact-info a:hover { color: #fff; }
+        .mega-cta {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--red);
+            padding: 12px 24px;
+            display: inline-block;
+            transition: background .2s;
+        }
+        .mega-cta:hover { background: var(--red-h); }
+
+        /* ─── NAV UPDATES ──────────────────────────────────── */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        /* Hide old center nav completely */
+        .nav-center { display: none !important; }
+        /* Hide old Get a Quote */
+        .nav-quote { display: none !important; }
+
+        /* Hamburger open state — X */
+        .nav-hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+        .nav-hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+        .nav-hamburger span {
+            transition: transform .3s, opacity .2s, background .3s;
+        }
+        .nav-hamburger {
+            display: flex !important;
+        }
+
+        /* ─── MEGA MENU RESPONSIVE ─────────────────────────── */
+        @media (max-width: 768px) {
+            .mega-menu-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px 24px;
+            }
+            .mega-menu-inner {
+                padding: 80px 24px 40px;
+                overflow-y: auto;
+            }
+            .mega-menu-close {
+                right: 24px;
+                top: 24px;
+            }
+            .mega-links a {
+                font-size: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .mega-menu-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- MEGA MENU -->
+    <div class="mega-menu" id="mega-menu">
+        <div class="mega-menu-inner">
+            <div class="mega-menu-close" onclick="toggleMenu()">
+                <span></span><span></span>
+            </div>
+            <div class="mega-menu-grid">
+                <div class="mega-col">
+                    <span class="mega-cat">Navigation</span>
+                    <ul class="mega-links">
+                        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                        <li><a href="#products" onclick="toggleMenu()">Products</a></li>
+                        <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+                        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                        <li><a href="#regions" onclick="toggleMenu()">Regions</a></li>
+                        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <span class="mega-cat">Flagpoles</span>
+                    <ul class="mega-links">
+                        <li><a href="#products" onclick="toggleMenu()">Ground Flagpoles</a></li>
+                        <li><a href="#products" onclick="toggleMenu()">Wall-Mounted Poles</a></li>
+                        <li><a href="#products" onclick="toggleMenu()">Accessories & Flags</a></li>
+                        <li><a href="#products" onclick="toggleMenu()">Flagpole Lighting</a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <span class="mega-cat">Signage</span>
+                    <ul class="mega-links">
+                        <li><a href="#products" onclick="switchTab('signage', document.querySelector('.product-tab:nth-child(2)'));toggleMenu()">Facade Signs</a></li>
+                        <li><a href="#products" onclick="switchTab('signage', document.querySelector('.product-tab:nth-child(2)'));toggleMenu()">Wayfinding Systems</a></li>
+                        <li><a href="#products" onclick="switchTab('signage', document.querySelector('.product-tab:nth-child(2)'));toggleMenu()">Monument Signs</a></li>
+                    </ul>
+                </div>
+                <div class="mega-col mega-contact">
+                    <span class="mega-cat">Get In Touch</span>
+                    <div class="mega-contact-info">
+                        <a href="tel:+9647504201761">IRQ: +964 750 420 1761</a>
+                        <a href="tel:+971507504938">UAE: +971 507 504 938</a>
+                        <a href="mailto:info@inko.ae">info@inko.ae</a>
+                    </div>
+                    <a href="#contact" class="mega-cta" onclick="toggleMenu()">Request a Quote →</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- NAV -->
     <nav class="nav" id="main-nav">
@@ -1670,46 +1841,23 @@
             <div class="nav-logo-wordmark"><span class="dot">i</span>nko</div>
             <div class="nav-logo-sub">Flags & Sign Systems</div>
         </a>
-        <ul class="nav-center">
-            <li><a href="#products">Products</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#regions">Regions</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
         <div class="nav-right">
-            <span class="nav-lang">AR / EN</span>
-            <a href="#contact" class="nav-quote">Get a Quote</a>
+            <span class="nav-lang" id="lang-toggle" onclick="toggleLang()">AR</span>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <button class="nav-hamburger" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
     </nav>
 
     <!-- HERO -->
     <div class="hero" id="top">
         <div class="hero-video-wrap">
-
-            <video autoplay muted loop playsinline poster="flags-poster.jpg">
-        <source src="flags-video.mp4" type="video/mp4">
-      </video>
-            <!--
-      IMPORTANT FOR DEV:
-      Replace the <img> below with your actual flags video:
-      
-
-      For now using a YouTube embed of free flags footage as placeholder:
-    -->
-            <!--<img src="images/1.jpg" alt="Flags flying at INKO installation" style="width:100%;height:100%;object-fit:cover;"> -->
-            <!-- 
-      When the real video is added, the img above is removed.
-      The video from the vercel prototype can drop in here directly.
-    -->
+            <img src="images/main-hero.jpeg" alt="INKO Flags and Sign Systems" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-left">
-                <p class="eyebrow" style="color:rgba(255,255,255,0.5);margin-bottom:20px;display:block;">Swedish Origin · MENA Distribution</p>
+                <p class="eyebrow" style="color:rgba(255,255,255,0.85);margin-bottom:20px;display:block;">Swedish Origin · MENA Distribution</p>
                 <h1 class="hero-headline">Flags,<br>Poles &<br><em>Signage</em></h1>
                 <p class="hero-sub">Professional flagpole and sign systems for governmental, commercial, and architectural environments across the Middle East.</p>
                 <div class="hero-actions">
@@ -1749,29 +1897,8 @@
         </div>
     </div>
 
-    <!-- TICKER -->
-    <div class="ticker">
-        <div class="ticker-track" id="ticker-inner">
-            <span class="ticker-item"><span class="sep"></span>Flagpoles</span>
-            <span class="ticker-item"><span class="sep"></span>Sign Systems</span>
-            <span class="ticker-item"><span class="sep"></span>Lighting Columns</span>
-            <span class="ticker-item"><span class="sep"></span>City Environments</span>
-            <span class="ticker-item"><span class="sep"></span>ISO Certified</span>
-            <span class="ticker-item"><span class="sep"></span>Swedish Engineering</span>
-            <span class="ticker-item"><span class="sep"></span>10-Year Warranty</span>
-            <span class="ticker-item"><span class="sep"></span>Iraq · UAE · KSA · Sweden</span>
-            <span class="ticker-item"><span class="sep"></span>Custom Installations</span>
-            <span class="ticker-item"><span class="sep"></span>Flagpoles</span>
-            <span class="ticker-item"><span class="sep"></span>Sign Systems</span>
-            <span class="ticker-item"><span class="sep"></span>Lighting Columns</span>
-            <span class="ticker-item"><span class="sep"></span>City Environments</span>
-            <span class="ticker-item"><span class="sep"></span>ISO Certified</span>
-            <span class="ticker-item"><span class="sep"></span>Swedish Engineering</span>
-            <span class="ticker-item"><span class="sep"></span>10-Year Warranty</span>
-            <span class="ticker-item"><span class="sep"></span>Iraq · UAE · KSA · Sweden</span>
-            <span class="ticker-item"><span class="sep"></span>Custom Installations</span>
-        </div>
-    </div>
+
+    <!-- INTRO BAND --></div>
 
     <!-- INTRO BAND -->
     <div class="intro-band">
@@ -1784,26 +1911,6 @@
                 and architectural environments.</p>
             <p>From the first consultation and project planning to delivery, installation, and after-sales support, INKO provides professional solutions that meet international standards and are adapted to the needs of each project.</p>
             <a href="#contact" class="arrow-link">Start a project</a>
-        </div>
-    </div>
-
-    <!-- STATS -->
-    <div class="stats-band">
-        <div class="stat-item">
-            <div class="stat-num">10<sup>+</sup></div>
-            <div class="stat-label">Year Structural Warranty</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num">ISO</div>
-            <div class="stat-label">9001 & 14001 Certified</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num">4</div>
-            <div class="stat-label">Countries Served</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num">500<sup>+</sup></div>
-            <div class="stat-label">Projects Completed</div>
         </div>
     </div>
 
@@ -1820,8 +1927,6 @@
         <div class="product-tabs">
             <button class="product-tab active" onclick="switchTab('flagpoles',this)">Flagpoles</button>
             <button class="product-tab" onclick="switchTab('signage',this)">Signage</button>
-            <button class="product-tab" onclick="switchTab('lighting',this)">Lighting Columns</button>
-            <button class="product-tab" onclick="switchTab('city',this)">City Environment</button>
         </div>
 
         <div class="product-panels" style="padding:0 0 0">
@@ -1896,82 +2001,6 @@
                             <div class="product-card-num">03 / Signage</div>
                             <h3 class="product-card-name">Monument Signs</h3>
                             <p class="product-card-desc">Freestanding entrance signs and identity monuments for estates, compounds, and institutional gateways.</p>
-                            <span class="product-card-link">View details</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="product-panel" id="panel-lighting">
-                <div class="product-grid">
-                    <a href="#contact" class="product-card">
-                        <div class="product-card-img">
-                            <img src="images/6.jpg" alt="Lighting Columns">
-                        </div>
-                        <div class="product-card-body">
-                            <div class="product-card-num">01 / Lighting</div>
-                            <h3 class="product-card-name">Street Columns</h3>
-                            <p class="product-card-desc">Architectural lighting columns for streets, plazas, and pedestrian environments — Swedish-engineered for durability in harsh climates.</p>
-                            <span class="product-card-link">View details</span>
-                        </div>
-                    </a>
-                    <a href="#contact" class="product-card">
-                        <div class="product-card-img">
-                            <img src="images/8.jpg" alt="Park Lighting">
-                        </div>
-                        <div class="product-card-body">
-                            <div class="product-card-num">02 / Lighting</div>
-                            <h3 class="product-card-name">Park & Garden</h3>
-                            <p class="product-card-desc">Lower-profile bollard and pedestal lighting for parks, gardens, and landscaped public environments.</p>
-                            <span class="product-card-link">View details</span>
-                        </div>
-                    </a>
-                    <a href="#contact" class="product-card">
-                        <div class="product-card-img">
-                            <img src="images/1.jpg" alt="Flagpole Lighting">
-                        </div>
-                        <div class="product-card-body">
-                            <div class="product-card-num">03 / Lighting</div>
-                            <h3 class="product-card-name">Flagpole Lighting</h3>
-                            <p class="product-card-desc">Integrated ground-flood and uplighting solutions for flagpole illumination, meeting 24-hour national flag display requirements.</p>
-                            <span class="product-card-link">View details</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="product-panel" id="panel-city">
-                <div class="product-grid">
-                    <a href="#contact" class="product-card">
-                        <div class="product-card-img">
-                            <img src="images/5.jpg" alt="Planters">
-                        </div>
-                        <div class="product-card-body">
-                            <div class="product-card-num">01 / City</div>
-                            <h3 class="product-card-name">Planters</h3>
-                            <p class="product-card-desc">Architectural concrete, metal, and composite planters for streetscapes, building entrances, and landscape integration.</p>
-                            <span class="product-card-link">View details</span>
-                        </div>
-                    </a>
-                    <a href="#contact" class="product-card">
-                        <div class="product-card-img">
-                            <img src="images/6.jpg" alt="Benches">
-                        </div>
-                        <div class="product-card-body">
-                            <div class="product-card-num">02 / City</div>
-                            <h3 class="product-card-name">Street Furniture</h3>
-                            <p class="product-card-desc">Benches, bollards, litter bins, and cycle stands — designed to work within a coherent city environment system.</p>
-                            <span class="product-card-link">View details</span>
-                        </div>
-                    </a>
-                    <a href="#contact" class="product-card">
-                        <div class="product-card-img">
-                            <img src="images/7.jpg" alt="Banners">
-                        </div>
-                        <div class="product-card-body">
-                            <div class="product-card-num">03 / City</div>
-                            <h3 class="product-card-name">Banner Arms & Pennants</h3>
-                            <p class="product-card-desc">Street banner arms and decorative pennant systems for festivals, national events, and permanent city branding programs.</p>
                             <span class="product-card-link">View details</span>
                         </div>
                     </a>
@@ -2313,6 +2342,26 @@
         </div>
     </div>
 
+    <!-- STATS -->
+    <div class="stats-band">
+        <div class="stat-item">
+            <div class="stat-num">10<sup>+</sup></div>
+            <div class="stat-label">Year Structural Warranty</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">ISO</div>
+            <div class="stat-label">9001 & 14001 Certified</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Countries Served</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">500<sup>+</sup></div>
+            <div class="stat-label">Projects Completed</div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-top">
@@ -2377,6 +2426,30 @@
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 40);
         });
+
+        // Mega menu
+        function toggleMenu() {
+            const menu = document.getElementById('mega-menu');
+            const hamburger = document.getElementById('nav-hamburger');
+            menu.classList.toggle('open');
+            hamburger.classList.toggle('open');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        // Close on escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mega-menu');
+                if (menu.classList.contains('open')) toggleMenu();
+            }
+        });
+
+        // Language toggle (placeholder)
+        function toggleLang() {
+            const btn = document.getElementById('lang-toggle');
+            btn.textContent = btn.textContent === 'AR' ? 'EN' : 'AR';
+        }
+
 
         // FAQ accordion
         function toggleFaq(btn) {
