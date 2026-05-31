@@ -1782,6 +1782,43 @@
                 gap: 32px;
             }
         }
+
+        /* ─── LOGO IMAGE ─────────────────────────────────── */
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+        .nav-logo-img {
+            height: 36px;
+            width: auto;
+            mix-blend-mode: screen;
+            transition: opacity .3s;
+        }
+        .nav-logo-img:hover {
+            opacity: 0.85;
+        }
+        /* On scrolled white nav, screen blend won't work — switch to multiply or just invert */
+        .nav.scrolled .nav-logo-img {
+            mix-blend-mode: multiply;
+        }
+        @media (max-width: 768px) {
+            .nav-logo-img {
+                height: 28px;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-logo-img {
+                height: 24px;
+            }
+        }
+
+        .footer-logo-img {
+            height: 32px;
+            width: auto;
+            mix-blend-mode: screen;
+            margin-bottom: 16px;
+            display: block;
+        }
     </style>
 </head>
 
@@ -1838,8 +1875,7 @@
     <!-- NAV -->
     <nav class="nav" id="main-nav">
         <a href="#" class="nav-logo">
-            <div class="nav-logo-wordmark"><span class="dot">i</span>nko</div>
-            <div class="nav-logo-sub">Flags & Sign Systems</div>
+            <img src="images/inko-logo.png" alt="INKO Flags & Sign Systems" class="nav-logo-img">
         </a>
         <div class="nav-right">
             <span class="nav-lang" id="lang-toggle" onclick="toggleLang()">AR</span>
@@ -2366,8 +2402,7 @@
     <footer>
         <div class="footer-top">
             <div>
-                <div class="footer-logo-mark"><span class="dot">i</span>nko</div>
-                <div class="footer-logo-sub">Flags & Sign Systems</div>
+                <img src="images/inko-logo.png" alt="INKO" class="footer-logo-img">
                 <p class="footer-tagline">Swedish quality. MENA expertise. Flagpoles, signage, and city environments from Baghdad to Dubai.</p>
                 <div class="footer-badges">
                     <span class="iso-badge">ISO 9001</span>
